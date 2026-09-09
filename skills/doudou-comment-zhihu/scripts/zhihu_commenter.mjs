@@ -63,6 +63,7 @@ export function buildSearchScript(keyword) {
  */
 export function buildCommentScript(options = {}) {
   const payload = JSON.stringify({
+    keyword: options.keyword || '',
     content: options.content || '',
     count: Number(options.count) || 5,
     cooldownMin: Number(options.cooldownMin) || 1500,
@@ -88,19 +89,27 @@ export function buildCommentScript(options = {}) {
     const cards = Array.from(document.querySelectorAll('.SearchResult-Card, .ContentItem'));
     const list = [];
     for (const card of cards) {
-      const titleLink = card.querySelector('h2 a, .ContentItem-title a, a[data-za-detail-view-element_name="Title"]');
+      const titleLink = card.querySelector('a[data-za-detail-view-element_name="Title"], h2 a, .ContentItem-title a');
       const commentBtn = Array.from(card.querySelectorAll('button')).find(b => {
-        const t = b.innerText.trim();
+        const t = (b.textContent || b.innerText || '').trim();
         return (t.includes('评论') || t.includes('添加评论')) && !t.includes('收起评论');
       });
 
       if (titleLink && commentBtn) {
-        const title = titleLink.innerText.trim();
+        const title = (titleLink.textContent || titleLink.innerText || '').trim();
         const href = titleLink.href;
         if (!list.some(item => item.href === href || item.title === title)) {
           list.push({ card, titleLink, commentBtn, title, href });
         }
       }
+    }
+    // 优先匹配包含关键词的主题
+    if (options.keyword) {
+      list.sort((a, b) => {
+        const aHas = a.title.includes(options.keyword) ? 1 : 0;
+        const bHas = b.title.includes(options.keyword) ? 1 : 0;
+        return bHas - aHas;
+      });
     }
     return list;
   }
@@ -136,7 +145,7 @@ export function buildCommentScript(options = {}) {
       await randomDelay(1200, 1800);
 
       // 3. 定位评论区容器与 Draft.js 编辑器
-      const commentContainer = item.card.querySelector('.Comments-container, [class*="Comments"]');
+      const commentContainer = item.card.querySelector('.Comments-container, [class*="Comments"], .CommentsV2');
       if (!commentContainer) {
         log('未检测到评论区展开，跳过本条');
         results.push({ index, title: item.title, href: item.href, status: 'failed', reason: '评论容器未展开' });
@@ -150,9 +159,10 @@ export function buildCommentScript(options = {}) {
         continue;
       }
 
-      // 4. 聚焦编辑器并注入回复文本
+      // 4. 聚焦编辑器并激活展开
       editor.focus();
-      await randomDelay(300, 600);
+      editor.click();
+      await randomDelay(400, 700);
 
       const dt = new DataTransfer();
       dt.setData('text/plain', options.content);
@@ -162,12 +172,12 @@ export function buildCommentScript(options = {}) {
       await randomDelay(800, 1200);
 
       // 5. 校验「发布」按钮激活状态
-      const publishBtn = Array.from(commentContainer.querySelectorAll('button')).find(b => b.innerText.trim() === '发布');
+      let publishBtn = Array.from(commentContainer.querySelectorAll('button')).find(b => (b.textContent || b.innerText || '').trim() === '发布');
       const isReady = Boolean(publishBtn && !publishBtn.disabled);
       log('发布按钮检测: ' + (isReady ? '已激活 (disabled=false)' : '未激活'));
 
-      if (!publishBtn) {
-        results.push({ index, title: item.title, href: item.href, status: 'failed', reason: '未找到发布按钮' });
+      if (!publishBtn || publishBtn.disabled) {
+        results.push({ index, title: item.title, href: item.href, status: 'failed', reason: '发布按钮未激活' });
         continue;
       }
 
@@ -176,7 +186,7 @@ export function buildCommentScript(options = {}) {
       publishBtn.focus();
       await randomDelay(300, 500);
       publishBtn.click();
-      await randomDelay(1500, 2500);
+      await randomDelay(2000, 3000);
       log('已提交发布');
 
       results.push({
