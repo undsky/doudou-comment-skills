@@ -1,5 +1,9 @@
 # 豆豆自动回帖技能库
 
+<p align="center">
+  <b>简体中文</b> | <a href="README_EN.md">English</a>
+</p>
+
 多平台社区相关主题自动检索、互动与批量回帖发评技能合集。基于 `chrome-devtools-mcp` 控制浏览器，遵循真实人机行为模拟与全链路防风控规约，实现自动化查找目标主题、展开评论区、注入回复内容并自动提交发布。
 
 ---
@@ -21,3 +25,9 @@
 | **doudou-comment-zhihu** | [`skills/doudou-comment-zhihu`](./skills/doudou-comment-zhihu) | [知乎 (Zhihu)](https://www.zhihu.com/) | 自动搜索关键词，筛选文章与回答，平滑展开评论区并完成回复内容的注入与发布。 |
 
 ---
+
+## 💬 交流与支持
+
+| 公众号                                       | QQ群                                          |
+| -------------------------------------------- | --------------------------------------------- |
+| ![公众号](https://cdn.undsky.com/img/gh.jpg) | ![QQ群](https://cdn.undsky.com/img/qqqun.jpg) |
