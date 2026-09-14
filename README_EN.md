@@ -1,4 +1,4 @@
-# Doudou Auto-Comment Skills
+<h1 align="center">Doudou Auto-Comment Skills</h1>
 
 <p align="center">
   <a href="README.md">简体中文</a> | <b>English</b>
@@ -19,6 +19,7 @@ A collection of skills for automated multi-platform community topic retrieval, i
   - [2. Usage](#2-usage)
 - [📦 Skills List](#-skills-list)
 - [💬 Community & Support](#-community--support)
+- [📄 License](#-license)
 
 ---
 
@@ -61,3 +62,14 @@ Search for "we-media" on Zhihu, find relevant articles, and reply with: https://
 | WeChat Official Account | QQ Group |
 | ----------------------- | -------- |
 | ![Official Account](https://cdn.undsky.com/img/gh.jpg) | ![QQ Group](https://cdn.undsky.com/img/qqqun.jpg) |
+
+---
+
+## 📄 License
+
+This project is licensed under the [CC BY-NC 4.0](LICENSE) License.
+
+- Free for personal use, learning, research, and non-commercial projects.
+- When publicly publishing derivative works, please credit the source.
+- Commercial use requires separate authorization, please contact the author.
+
