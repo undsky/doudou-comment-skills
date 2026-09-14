@@ -7,7 +7,7 @@
 A collection of skills for automated multi-platform community topic retrieval, interaction, and batch auto-replying/commenting. Powered by `chrome-devtools-mcp` for browser automation, it strictly adheres to realistic human behavior simulation and end-to-end anti-bot protocols, enabling automated discovery of target topics, comment section unfolding, response injection, and automatic comment submission.
 
 <p align="center">
-  <img src="./assets/cover.png" alt="Doudou Auto-Comment Skills Banner" width="100%" />
+  <img src="./assets/cover_thumb.png" alt="Doudou Auto-Comment Skills Banner" width="100%" />
 </p>
 
 ---

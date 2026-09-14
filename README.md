@@ -7,7 +7,7 @@
 多平台社区相关主题自动检索、互动与批量回帖发评技能合集。通过 AI Agent 并使用 `chrome-devtools-mcp` 控制浏览器，遵循真实人机行为模拟与全链路防风控规约，实现自动化查找目标主题、展开评论区、注入回复内容并自动提交发布。
 
 <p align="center">
-  <img src="./assets/cover.png" alt="豆豆自动回帖技能库 Banner" width="100%" />
+  <img src="./assets/cover_thumb.png" alt="豆豆自动回帖技能库 Banner" width="100%" />
 </p>
 
 ---
